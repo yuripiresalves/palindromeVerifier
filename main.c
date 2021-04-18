@@ -1,7 +1,7 @@
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
-
-// Testando pull request
 struct TpFilaDupla
 {
   char Elem[100];
@@ -10,6 +10,8 @@ struct TpFilaDupla
 };
 
 int TamMax = 100;
+char x;
+char y;
 
 struct TpFilaDupla InicializaFilaDupla(struct TpFilaDupla D)
 {
@@ -74,13 +76,14 @@ struct TpFilaDupla InsereDireitaFilaDupla(struct TpFilaDupla D, char x)
 {
   if (FilaDuplaCheia(D) == 0)
   {
-    if (D.Dir == TamMax)
-    {
-      D = DeslocaFilaDupla(D);
-    }
+    // if (D.Dir == TamMax)
+    // {
+    //   D = DeslocaFilaDupla(D);
+    // }
 
     D.Dir = D.Dir + 1;
     D.Elem[D.Dir] = x;
+    // printf("%c\n", D.Elem[D.Dir]);
 
     return D;
   }
@@ -118,19 +121,75 @@ struct TpFilaDupla RemoveDireitaFilaDupla(struct TpFilaDupla D, char x)
   }
 }
 
+char ElementoEsquerdaFilaDupla(struct TpFilaDupla D)
+{
+
+  if (FilaDuplaVazia(D) == 0)
+  {
+    return D.Elem[D.Esq + 1];
+  }
+  else
+  {
+    printf("Fila Dupla esta vazia!\n");
+  }
+}
+
+char ElementoDireitaFilaDupla(struct TpFilaDupla D)
+{
+  if (FilaDuplaVazia(D) == 0)
+  {
+    return D.Elem[D.Dir];
+  }
+  else
+  {
+    printf("Fila Dupla esta vazia!\n");
+  }
+}
+
 int main()
 {
   struct TpFilaDupla D;
   D = InicializaFilaDupla(D);
+  char palavra[100];
 
-  if (FilaDuplaVazia(D) == 1)
+  printf("Digite a palavra: ");
+  fgets(palavra, 100, stdin);
+
+  for (int i = 0; i <= strlen(palavra); i++)
   {
-    printf("ta vazio\n");
+    if (isalpha(palavra[i]))
+    {
+      D = InsereDireitaFilaDupla(D, tolower(palavra[i]));
+    }
+  }
+  x = ElementoEsquerdaFilaDupla(D);
+  y = ElementoDireitaFilaDupla(D);
+
+  while(x == y)
+  {
+    D = RemoveEsquerdaFilaDupla(D, x);
+    D = RemoveDireitaFilaDupla(D, y);
+
+    x = ElementoEsquerdaFilaDupla(D);
+    y = ElementoDireitaFilaDupla(D);
+    if( FilaDuplaVazia(D) == 1 )
+        break;
   }
 
-  if (FilaDuplaCheia(D) == 1)
+
+
+  printf("\n%c", x);
+  printf("\n%c", y);
+
+  // for (int i = 0; i <= 5; i++)
+  // {
+  //   printf("%c\n", D.Elem[i]);
+  // }
+
+    printf("\n");
+  for (int j = D.Esq + 1; j <= D.Dir; j++)
   {
-    printf("ta cheia");
+    printf("%c\n", D.Elem[j]);
   }
 
   return 0;
