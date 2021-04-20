@@ -159,9 +159,41 @@ int main()
   {
     if (isalpha(palavra[i]))
     {
-      D = InsereDireitaFilaDupla(D, tolower(palavra[i]));
+        D = InsereDireitaFilaDupla(D, tolower(palavra[i]));
+    /*
+        if ((palavra[i] == -96) || (palavra[i] == -58) || (palavra[i] == -125))
+        {
+            palavra[i] =97;
+        }
+
+
+        if ((palavra[i] == -126) || (palavra[i] == -120) || (palavra[i] == -118))
+        {
+            palavra[i] =101;;
+        }
+
+
+        if ((palavra[i] == -95) || (palavra[i] == -115) || (palavra[i] == -116))
+        {
+            palavra[i] =105;
+        }
+                                                                                            // Codigo para tirar os acentos
+
+        if ((palavra[i] == -94) || (palavra[i] == -107) || (palavra[i] == -109))
+        {
+            palavra[i] =111;
+        }
+
+
+        if ((palavra[i] == -105) || (palavra[i] == -93) || (palavra[i] == -106))
+        {
+            palavra[i] =117;
+        }
+     */
     }
+
   }
+
   x = ElementoEsquerdaFilaDupla(D);
   y = ElementoDireitaFilaDupla(D);
 
@@ -194,3 +226,4 @@ int main()
 
   return 0;
 }
+
