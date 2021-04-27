@@ -159,71 +159,31 @@ int main()
   {
     if (isalpha(palavra[i]))
     {
-        D = InsereDireitaFilaDupla(D, tolower(palavra[i]));
-    /*
-        if ((palavra[i] == -96) || (palavra[i] == -58) || (palavra[i] == -125))
-        {
-            palavra[i] =97;
-        }
-
-
-        if ((palavra[i] == -126) || (palavra[i] == -120) || (palavra[i] == -118))
-        {
-            palavra[i] =101;;
-        }
-
-
-        if ((palavra[i] == -95) || (palavra[i] == -115) || (palavra[i] == -116))
-        {
-            palavra[i] =105;
-        }
-                                                                                            // Codigo para tirar os acentos
-
-        if ((palavra[i] == -94) || (palavra[i] == -107) || (palavra[i] == -109))
-        {
-            palavra[i] =111;
-        }
-
-
-        if ((palavra[i] == -105) || (palavra[i] == -93) || (palavra[i] == -106))
-        {
-            palavra[i] =117;
-        }
-     */
+      D = InsereDireitaFilaDupla(D, tolower(palavra[i]));
     }
-
   }
 
-  x = ElementoEsquerdaFilaDupla(D);
-  y = ElementoDireitaFilaDupla(D);
-
-  while(x == y)
+  do
   {
+    x = ElementoEsquerdaFilaDupla(D);
+    y = ElementoDireitaFilaDupla(D);
+
     D = RemoveEsquerdaFilaDupla(D, x);
     D = RemoveDireitaFilaDupla(D, y);
 
-    x = ElementoEsquerdaFilaDupla(D);
-    y = ElementoDireitaFilaDupla(D);
-    if( FilaDuplaVazia(D) == 1 )
-        break;
-  }
+    if (FilaDuplaVazia(D) == 1)
+      break;
 
+  } while (x == y);
 
-
-  printf("\n%c", x);
-  printf("\n%c", y);
-
-  // for (int i = 0; i <= 5; i++)
-  // {
-  //   printf("%c\n", D.Elem[i]);
-  // }
-
-    printf("\n");
-  for (int j = D.Esq + 1; j <= D.Dir; j++)
+  if (FilaDuplaVazia(D) == 1)
   {
-    printf("%c\n", D.Elem[j]);
+    printf("%s eh um palindromo!\n", &palavra);
+  }
+  else
+  {
+    printf("%s NAO eh um palindromo!\n", &palavra);
   }
 
   return 0;
 }
-
