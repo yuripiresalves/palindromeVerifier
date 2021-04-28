@@ -151,53 +151,53 @@ int main()
   printf("Digite a palavra: ");
   fgets(palavra, 100, stdin);
 
-    for (int i = 0; i <= strlen(palavra); i++)
-    {
-      if ((palavra[i] == -96  ) || (palavra[i] == -58) || (palavra[i] == -125) || (palavra[i] == -123))
+  for (int i = 0; i <= strlen(palavra); i++)
+  {
+    if ((palavra[i] == -96  ) || (palavra[i] == -58) || (palavra[i] == -125) || (palavra[i] == -123))
         palavra[i] = 97;
 
-      if ((palavra[i] == -126) || (palavra[i] == -120) || (palavra[i] == -118))
+    if ((palavra[i] == -126) || (palavra[i] == -120) || (palavra[i] == -118))
         palavra[i] =101;
 
-      if ((palavra[i] == -95) || (palavra[i] == -115) || (palavra[i] == -116))
+    if ((palavra[i] == -95) || (palavra[i] == -115) || (palavra[i] == -116))
         palavra[i] =105;
 
-      if ((palavra[i] == -94) || (palavra[i] == -107) || (palavra[i] == -109))
+    if ((palavra[i] == -94) || (palavra[i] == -107) || (palavra[i] == -109))
         palavra[i] =111;
 
-      if ((palavra[i] == -105) || (palavra[i] == -93) || (palavra[i] == -106))
+    if ((palavra[i] == -105) || (palavra[i] == -93) || (palavra[i] == -106))
         palavra[i] =117;
     }
 
-    for (int i = 0; i <= strlen(palavra); i++)
-      {
-        if (isalpha(palavra[i]))
-        {
-          D = InsereDireitaFilaDupla(D, tolower(palavra[i]));
-        }
-      }
+  for (int i = 0; i <= strlen(palavra); i++)
+  {
+    if (isalpha(palavra[i]))
+    {
+      D = InsereDireitaFilaDupla(D, tolower(palavra[i]));
+    }
+  }
 
-      do
-      {
-        x = ElementoEsquerdaFilaDupla(D);
-        y = ElementoDireitaFilaDupla(D);
+  do
+  {
+    x = ElementoEsquerdaFilaDupla(D);
+    y = ElementoDireitaFilaDupla(D);
 
-        D = RemoveEsquerdaFilaDupla(D, x);
-        D = RemoveDireitaFilaDupla(D, y);
+    D = RemoveEsquerdaFilaDupla(D, x);
+    D = RemoveDireitaFilaDupla(D, y);
 
-        if (FilaDuplaVazia(D) == 1)
-          break;
+    if (FilaDuplaVazia(D) == 1)
+        break;
 
-      }while (x == y);
+  }while (x == y);
 
-      if (FilaDuplaVazia(D) == 1)
-      {
-        printf("%s Eh  um palindromo!\n", &palavra);
-      }
-      else
-      {
-        printf("%s Nao eh um palindromo!\n", &palavra);
-      }
+    if (FilaDuplaVazia(D) == 1)
+    {
+      printf("%s Eh  um palindromo!\n", &palavra);
+    }
+    else
+    {
+      printf("%s Nao eh um palindromo!\n", &palavra);
+    }
 
   return 0;
 }
