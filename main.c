@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
 
 struct TpFilaDupla
 {
@@ -76,14 +77,9 @@ struct TpFilaDupla InsereDireitaFilaDupla(struct TpFilaDupla D, char x)
 {
   if (FilaDuplaCheia(D) == 0)
   {
-    // if (D.Dir == TamMax)
-    // {
-    //   D = DeslocaFilaDupla(D);
-    // }
 
     D.Dir = D.Dir + 1;
     D.Elem[D.Dir] = x;
-    // printf("%c\n", D.Elem[D.Dir]);
 
     return D;
   }
@@ -157,6 +153,24 @@ int main()
 
   for (int i = 0; i <= strlen(palavra); i++)
   {
+    if ((palavra[i] == -96  ) || (palavra[i] == -58) || (palavra[i] == -125) || (palavra[i] == -123))
+        palavra[i] = 97;
+
+    if ((palavra[i] == -126) || (palavra[i] == -120) || (palavra[i] == -118))
+        palavra[i] =101;
+
+    if ((palavra[i] == -95) || (palavra[i] == -115) || (palavra[i] == -116))
+        palavra[i] =105;
+
+    if ((palavra[i] == -94) || (palavra[i] == -107) || (palavra[i] == -109))
+        palavra[i] =111;
+
+    if ((palavra[i] == -105) || (palavra[i] == -93) || (palavra[i] == -106))
+        palavra[i] =117;
+    }
+
+  for (int i = 0; i <= strlen(palavra); i++)
+  {
     if (isalpha(palavra[i]))
     {
       D = InsereDireitaFilaDupla(D, tolower(palavra[i]));
@@ -172,18 +186,18 @@ int main()
     D = RemoveDireitaFilaDupla(D, y);
 
     if (FilaDuplaVazia(D) == 1)
-      break;
+        break;
 
-  } while (x == y);
+  }while (x == y);
 
-  if (FilaDuplaVazia(D) == 1)
-  {
-    printf("%s eh um palindromo!\n", &palavra);
-  }
-  else
-  {
-    printf("%s NAO eh um palindromo!\n", &palavra);
-  }
+    if (FilaDuplaVazia(D) == 1)
+    {
+      printf("%s Eh  um palindromo!\n", &palavra);
+    }
+    else
+    {
+      printf("%s Nao eh um palindromo!\n", &palavra);
+    }
 
   return 0;
 }
