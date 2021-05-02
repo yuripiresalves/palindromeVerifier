@@ -2,6 +2,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <locale.h>
 
 struct TpFilaDupla
 {
@@ -13,7 +14,7 @@ struct TpFilaDupla
 int TamMax = 100;
 char x;
 char y;
-
+char original[100];
 struct TpFilaDupla InicializaFilaDupla(struct TpFilaDupla D)
 {
   D.Esq = TamMax / 2;
@@ -141,17 +142,10 @@ char ElementoDireitaFilaDupla(struct TpFilaDupla D)
     printf("Fila Dupla esta vazia!\n");
   }
 }
-
-int main()
+char* RemoveAcentuacao (char palavra[100])
 {
-  struct TpFilaDupla D;
-  D = InicializaFilaDupla(D);
-  char palavra[100];
-
-  printf("Digite a palavra: ");
-  fgets(palavra, 100, stdin);
-
-  for (int i = 0; i <= strlen(palavra); i++)
+   strcpy (original, palavra);
+    for (int i = 0; i <= strlen(palavra); i++)
   {
     if ((palavra[i] == -96  ) || (palavra[i] == -58) || (palavra[i] == -125) || (palavra[i] == -123))
         palavra[i] = 97;
@@ -168,6 +162,21 @@ int main()
     if ((palavra[i] == -105) || (palavra[i] == -93) || (palavra[i] == -106))
         palavra[i] =117;
     }
+    char*   resultado = palavra;
+    return resultado;
+}
+
+int main()
+{
+  setlocale(LC_ALL, "Portuguese");
+  struct TpFilaDupla D;
+  D = InicializaFilaDupla(D);
+  char palavra[100];
+
+  printf("Digite a palavra: ");
+  fgets(palavra, 100, stdin);
+
+  RemoveAcentuacao(palavra);
 
   for (int i = 0; i <= strlen(palavra); i++)
   {
@@ -190,14 +199,18 @@ int main()
 
   }while (x == y);
 
-    if (FilaDuplaVazia(D) == 1)
-    {
-      printf("%s Eh  um palindromo!\n", &palavra);
-    }
+  char *pos;
+  if ((pos=strchr(original, '\n')) != NULL)
+  *pos = '\0';
+
+  if (FilaDuplaVazia(D) == 1)
+  {
+    printf("%s é um palindromo!", original);
+  }
     else
-    {
-      printf("%s Nao eh um palindromo!\n", &palavra);
-    }
+  {
+    printf("%s nao é um palindromo!\n", original);
+  }
 
   return 0;
 }
