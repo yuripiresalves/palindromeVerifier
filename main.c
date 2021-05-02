@@ -175,7 +175,7 @@ int main()
   D = InicializaFilaDupla(D);
   char palavra[200];
 
-  printf("Digite a palavra: ");
+  printf("Digite a palavra ou frase: ");
   fgets(palavra, 200, stdin);
 
   RemoveAcentuacao(palavra);
@@ -207,11 +207,11 @@ int main()
 
   if (FilaDuplaVazia(D) == 1)
   {
-    printf("%s eh um palindromo!", original);
+    printf("\n%s eh um palindromo!", original);
   }
   else
   {
-    printf("%s NAO eh um palindromo!\n", original);
+    printf("\n%s NAO eh um palindromo!\n", original);
   }
   return 0;
 }
