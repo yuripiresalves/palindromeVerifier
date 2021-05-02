@@ -2,19 +2,19 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
-#include <locale.h>
 
 struct TpFilaDupla
 {
-  char Elem[100];
+  char Elem[200];
   int Esq;
   int Dir;
 };
 
-int TamMax = 100;
+int TamMax = 200;
 char x;
 char y;
-char original[100];
+char original[200];
+
 struct TpFilaDupla InicializaFilaDupla(struct TpFilaDupla D)
 {
   D.Esq = TamMax / 2;
@@ -142,39 +142,41 @@ char ElementoDireitaFilaDupla(struct TpFilaDupla D)
     printf("Fila Dupla esta vazia!\n");
   }
 }
-char* RemoveAcentuacao (char palavra[100])
+
+char *RemoveAcentuacao(char palavra[200])
 {
-   strcpy (original, palavra);
-    for (int i = 0; i <= strlen(palavra); i++)
+  strcpy(original, palavra);
+  for (int i = 0; i <= strlen(palavra); i++)
   {
-    if ((palavra[i] == -96  ) || (palavra[i] == -58) || (palavra[i] == -125) || (palavra[i] == -123))
-        palavra[i] = 97;
+    if ((palavra[i] == -95) || (palavra[i] == -96) || (palavra[i] == -93) || (palavra[i] == -94) || (palavra[i] == -125) || (palavra[i] == -126) || (palavra[i] == -127) || (palavra[i] == -128))
+      palavra[i] = 97;
 
-    if ((palavra[i] == -126) || (palavra[i] == -120) || (palavra[i] == -118))
-        palavra[i] =101;
+    if ((palavra[i] == -86) || (palavra[i] == -87) || (palavra[i] == -118) || (palavra[i] == -119) || (palavra[i] == -94))
+      palavra[i] = 101;
 
-    if ((palavra[i] == -95) || (palavra[i] == -115) || (palavra[i] == -116))
-        palavra[i] =105;
+    if ((palavra[i] == -83) || (palavra[i] == -115))
+      palavra[i] = 105;
 
-    if ((palavra[i] == -94) || (palavra[i] == -107) || (palavra[i] == -109))
-        palavra[i] =111;
+    if ((palavra[i] == -75) || (palavra[i] == -76) || (palavra[i] == -77) || (palavra[i] == -108) || (palavra[i] == -107) || (palavra[i] == -109))
+      palavra[i] = 111;
 
-    if ((palavra[i] == -105) || (palavra[i] == -93) || (palavra[i] == -106))
-        palavra[i] =117;
-    }
-    char*   resultado = palavra;
-    return resultado;
+    if ((palavra[i] == -170) || (palavra[i] == -102))
+      palavra[i] = 117;
+    if ((palavra[i] == -89))
+      palavra[i] = 99;
+  }
+  char *resultado = palavra;
+  return resultado;
 }
 
 int main()
 {
-  setlocale(LC_ALL, "Portuguese");
   struct TpFilaDupla D;
   D = InicializaFilaDupla(D);
-  char palavra[100];
+  char palavra[200];
 
-  printf("Digite a palavra: ");
-  fgets(palavra, 100, stdin);
+  printf("Digite a palavra ou frase: ");
+  fgets(palavra, 200, stdin);
 
   RemoveAcentuacao(palavra);
 
@@ -195,22 +197,21 @@ int main()
     D = RemoveDireitaFilaDupla(D, y);
 
     if (FilaDuplaVazia(D) == 1)
-        break;
+      break;
 
-  }while (x == y);
+  } while (x == y);
 
   char *pos;
-  if ((pos=strchr(original, '\n')) != NULL)
-  *pos = '\0';
+  if ((pos = strchr(original, '\n')) != NULL)
+    *pos = '\0';
 
   if (FilaDuplaVazia(D) == 1)
   {
-    printf("%s é um palindromo!", original);
+    printf("\n%s eh um palindromo!", original);
   }
-    else
+  else
   {
-    printf("%s nao é um palindromo!\n", original);
+    printf("\n%s NAO eh um palindromo!\n", original);
   }
-
   return 0;
 }
